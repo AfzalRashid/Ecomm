@@ -6,6 +6,7 @@ const connectDB = require('./config/db')
 const productRouter = require('./routes/productRoutes')
 const userRoutes = require('./routes/userRoutes')
 const {notFound, errorHandler} = require('./middleware/errorMiddleware')
+const cookieParser = require('cookie-parser')
 
 connectDB()
 
@@ -18,13 +19,13 @@ app.get('/', function(req,res){
     res.send('Welcome to Backend')
 })
 
-//Body parser middleware
-
+//Cookie parser middleware
+app.use(cookieParser())
 
 
 
 app.use('/products', productRouter);
-app.use('/user', userRoutes)
+app.use('/users', userRoutes)
 
 app.use(notFound)
 app.use(errorHandler)
